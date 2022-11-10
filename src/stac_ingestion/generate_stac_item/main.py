@@ -101,16 +101,16 @@ def log_time_to_complete(start_time, end_time, item_id, file_name):
     time_to_process_file = end_time - start_time
 
     start_time_str = start_time.strftime(
-        "%Y-%m-%d %H:%M:%S")
+        "%Y-%m-%d %H:%M:%S.%f")
 
-    end_time_str = end_time.strftime("%Y-%m-%d %H:%M:%S")
+    end_time_str = end_time.strftime("%Y-%m-%d %H:%M:%S.%f")
 
     properties = {'custom_dimensions': {
         'process': 'stac_generation',
         'item_id_stac_generation': item_id,
-        'start_time': start_time_str,
-        'end_time': end_time_str,
-        'process_time': time_to_process_file.total_seconds(),
+        'stac_start_time': start_time_str,
+        'stac_end_time': end_time_str,
+        'stac_process_time': time_to_process_file.total_seconds(),
         'file_name': file_name}}
 
     logger.info('action', extra=properties)

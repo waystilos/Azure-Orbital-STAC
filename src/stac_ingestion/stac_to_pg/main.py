@@ -112,12 +112,12 @@ def main():
                     time_to_process_file = end_time - start_time
 
                     start_time_str = start_time.strftime(
-                        "%Y-%m-%d %H:%M:%S")
-                    end_time_str = end_time.strftime("%Y-%m-%d %H:%M:%S")
+                        "%Y-%m-%d %H:%M:%S.%f")
+                    end_time_str = end_time.strftime("%Y-%m-%d %H:%M:%S.%f")
 
                     # Create a custom event for the Azure Application Insights
                     properties = {'custom_dimensions': {
-                        'process': 'pgstac_insert', 'item_id_pgstac': item_id, 'start_time': start_time_str, 'end_time': end_time_str, 'process_time': time_to_process_file.total_seconds(), 'file_name': item_id + '.ndjson'}}
+                        'process': 'pgstac_insert', 'item_id_pgstac': item_id, 'pg_start_time': start_time_str, 'pg_end_time': end_time_str, 'pg_process_time': time_to_process_file.total_seconds(), 'file_name': item_id + '.ndjson'}}
 
                     logger.info('action', extra=properties)
                     receiver.complete_message(msg)
